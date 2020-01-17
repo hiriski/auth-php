@@ -1,0 +1,9 @@
+KET untuk structure folder
+
+functions :
+        database.php
+        user.php
+
+views :
+        header.php
+        footer.php
