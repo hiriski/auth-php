@@ -1,6 +1,32 @@
 <?php include 'views/header.php'; ?>
 <?php require_once('functions/database.php'); ?>
+<?php require_once('core/init.php'); ?>
 
+<?php
+function signin() {
+  $email    = $_POST['email'];
+  $password = $_POST['password'];
+
+  /** pastikan user tidak mengisi data kosong */
+  if ( !empty(trim($email)) && !empty(($password)) ) {
+
+    /* Periksa credentials user */
+    if (check_credentials($email, $password)) {
+      alert('success', 'Login Success!');
+    } else {
+      alert("danger", "Email or password it's wrong!");
+    }
+  } else {
+    alert('warning', 'Isi datanya dong gan');
+  }
+
+}
+
+if (isset($_POST['submit'])) {
+  signin();
+}
+
+?>
 
 
 <div id="auth_php" class="my-5">

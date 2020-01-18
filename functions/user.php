@@ -54,4 +54,38 @@ function register_user($name, $email, $password) {
 
 
 
+/** Login */
+function check_credentials($email, $password) {
+  global $connect;
+  $email    = mysqli_real_escape_string($connect, $email);
+  $password = mysqli_real_escape_string($connect, $password);
+
+  $query_select_pass = "SELECT password FROM users WHERE email='$email'";
+
+  $result = mysqli_query($connect, $query_select_pass);
+  
+  /** Keluarkan datanya 
+      * KET : karena hanya 1 data maka keluarkan langsung nggak harus di loop 
+      * INGAT! meskipun resultnya hanya 1 data tapi hasilnya berbentuk object
+      * sesuai dengan fungsi fetch yang digunakan (object atau array) */
+  $result_pass = mysqli_fetch_object($result);
+
+  /** jika result kosong return false; */
+  if(!$result_pass) {
+    return false;
+  }
+
+  /** Mencocokan password yang sudah di hash (Verify) dan string yang dimasukan oleh user
+  * Fungsi ini punya 2 parameter 
+  * param 1 string yang dimasukan user 
+  * param 2 password yang sudah di hash di db */
+  if (password_verify($password, $result_pass->password)) { //<< password dalam object
+    return true;
+  } else {
+    return false;
+  }
+
+}
+
+
 ?>
