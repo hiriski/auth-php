@@ -3,6 +3,7 @@ KET untuk structure folder
 functions :
         database.php
         user.php
+        alert.php
 
 views :
         header.php

@@ -17,6 +17,18 @@
     }
   }
 
+
+
+/** Function logged in */
+function is_logged_in() {
+  if(isset($_SESSION['user'])) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+
   
 ?>
 <html>
@@ -47,8 +59,12 @@
   <div class="container">
       <ul class="nav justify-content-center">
         <li class="nav-item"><a href="<?=base_url();?>" class="nav-link">Index</a></li>
-        <li class="nav-item"><a href="<?=base_url();?>signin.php" class="nav-link">SignIn</a></li>
-        <li class="nav-item"><a href="<?=base_url();?>signup.php" class="nav-link">SingUp</a></li>
+        <?php if(is_logged_in()):?>
+          <li class="nav-item"><a href="<?=base_url();?>signout.php" class="nav-link">SignOut</a></li>
+        <?php else:?>
+          <li class="nav-item"><a href="<?=base_url();?>signin.php" class="nav-link">SignIn</a></li>
+          <li class="nav-item"><a href="<?=base_url();?>signup.php" class="nav-link">SingUp</a></li>
+        <?php endif;?>
         <li class="nav-item"><a href="<?=base_url();?>dashboard.php" class="nav-link">Dashboard</a></li>
       </ul>
   </div>

@@ -1,11 +1,20 @@
 
 <?php
 
+/** function escape */
+function escape($param) {
+  global $connect;
+  return mysqli_real_escape_string($connect, $param);
+}
+
+
+
+
 /** Cek email ketika register (menguji nama kembar) */
 function register_check_email($email) {
   global $connect;
 
-  $email = mysqli_real_escape_string($connect, $email);
+  $email = escape($email);
   $query_check_email = "SELECT * FROM users WHERE email='$email'";
 
   /* hasil qyery */
@@ -34,9 +43,9 @@ function register_user($name, $email, $password) {
   global $connect;
 
   /** security sql injection */
-  $name     = mysqli_real_escape_string($connect, $name);
-  $email    = mysqli_real_escape_string($connect, $email);
-  $password = mysqli_real_escape_string($connect, $password);
+  $name     = escape($name);
+  $email    = escape($email);
+  $password = escape($password);
 
   /** hash dulu passwordnya */
   $password = password_hash($password, PASSWORD_DEFAULT);
@@ -57,8 +66,8 @@ function register_user($name, $email, $password) {
 /** Login */
 function check_credentials($email, $password) {
   global $connect;
-  $email    = mysqli_real_escape_string($connect, $email);
-  $password = mysqli_real_escape_string($connect, $password);
+  $email    = escape($email);
+  $password = escape($password);
 
   $query_select_pass = "SELECT password FROM users WHERE email='$email'";
 
@@ -94,7 +103,7 @@ function check_credentials($email, $password) {
         * tapi ini adalah kebalikannya */
 function login_check_email($email) {
   global $connect;
-  $email = mysqli_real_escape_string($connect, $email);
+  $email = escape($email);
   $query_check_email = "SELECT * FROM users WHERE email='$email'";
 
   /* hasil qyery */
