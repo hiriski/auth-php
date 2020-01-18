@@ -10,14 +10,21 @@ function signin() {
   /** pastikan user tidak mengisi data kosong */
   if ( !empty(trim($email)) && !empty(($password)) ) {
 
-    /* Periksa credentials user */
-    if (check_credentials($email, $password)) {
-      alert('success', 'Login Success!');
+    /** Periksa email user */
+    if(login_check_email($email)) {
+
+      /* Periksa credentials user */
+      if (check_credentials($email, $password)) {
+        alert('success', 'Login Success!');
+      } else {
+        alert("danger", "Email or password it's wrong!");
+      }
     } else {
-      alert("danger", "Email or password it's wrong!");
+      alert('danger', 'Email ini tidak terdaftar!');
     }
+    
   } else {
-    alert('warning', 'Isi datanya dong gan');
+    alert('warning', 'Mohon diisi ya');
   }
 
 }

@@ -13,7 +13,7 @@ function signup() {
   if ( !empty(trim($name)) && !empty(trim($email)) && !empty(($password)) ) {
 
     /** cek email saat register */
-    if (check_email($email)) {
+    if (register_check_email($email)) {
       if(register_user($name, $email, $password)){
         alert('success', 'Register success!');
       } else {
@@ -25,7 +25,7 @@ function signup() {
 
   }
   else {
-    alert('warning', 'Isi datanya dong gan');
+    alert('warning', 'Mohon diisi ya');
   }
 }
 
