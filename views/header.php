@@ -33,6 +33,11 @@
     footer {
       margin-top: 100px;
     }
+    .floating-alert {
+      position: absolute;
+      left: 2rem;
+      bottom: 2rem;
+    }
   </style>
 </head>
 

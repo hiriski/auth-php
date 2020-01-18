@@ -1,6 +1,34 @@
 <?php include 'views/header.php'; ?>
 <?php require_once('functions/database.php'); ?>
+<?php require_once('core/init.php'); ?>
 
+<?php
+
+function signup() {
+  $name     = $_POST['name'];
+  $email    = $_POST['email'];
+  $password = $_POST['password'];
+
+  /** pastikan user mengisi name email dan passwordnya + di trim() */
+  if ( !empty(trim($name)) && !empty(trim($email)) && !empty(($password)) ) {
+    if(register_user($name, $email, $password)){
+      notification('success', 'Register success!');
+    } else {
+      notification('danger', 'Register failed!');
+    }
+  }
+  else {
+    notification('warning', 'Isi datanya dong gan');
+  }
+}
+
+
+if(isset($_POST['submit'])) {
+  signup();
+}
+
+
+?>
 
 
 <div id="auth_php" class="my-5">
@@ -17,7 +45,7 @@
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="text" name="email" class="form-control">
+                <input type="email" name="email" class="form-control">
               </div>
               <div class="form-group">
                 <label for="password">Password</label>
