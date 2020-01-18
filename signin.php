@@ -16,6 +16,13 @@ function signin() {
       /* Periksa credentials user */
       if (check_credentials($email, $password)) {
         alert('success', 'Login Success!');
+
+        /** Menggunakan SESSION */
+        $_SESSION['user'] = $email;
+
+        /** Redirect ke Dashboard */
+        header('Location: dashboard.php');
+
       } else {
         alert("danger", "Email or password it's wrong!");
       }
