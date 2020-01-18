@@ -11,14 +11,21 @@ function signup() {
 
   /** pastikan user mengisi name email dan passwordnya + di trim() */
   if ( !empty(trim($name)) && !empty(trim($email)) && !empty(($password)) ) {
-    if(register_user($name, $email, $password)){
-      notification('success', 'Register success!');
+
+    /** cek email saat register */
+    if (check_email($email)) {
+      if(register_user($name, $email, $password)){
+        alert('success', 'Register success!');
+      } else {
+        alert('danger', 'Register failed!');
+      }
     } else {
-      notification('danger', 'Register failed!');
+      alert('danger', 'Email ini sudah digunakan!');
     }
+
   }
   else {
-    notification('warning', 'Isi datanya dong gan');
+    alert('warning', 'Isi datanya dong gan');
   }
 }
 
