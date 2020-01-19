@@ -1,8 +1,10 @@
 <?php
 
+/** mulai session */
 session_start();
 
-session_unset($_SESSION['user']);
+/** hancurkan session */
+session_destroy();
 
 header('Location: signin.php');
 
