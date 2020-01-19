@@ -11,7 +11,7 @@ function signin() {
   if ( !empty(trim($email)) && !empty(($password)) ) {
 
     /** Periksa email user */
-    if(login_check_email($email)) {
+    if(check_email($email) !== 0) {
 
       /* Periksa credentials user */
       if (check_credentials($email, $password)) {

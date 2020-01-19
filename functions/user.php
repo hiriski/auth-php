@@ -9,28 +9,17 @@ function escape($param) {
 
 
 
-
-/** Cek email ketika register (menguji nama kembar) */
-function register_check_email($email) {
+/** (Refactor) function check email ketika signup dan signin */
+function check_email($email) {
   global $connect;
 
   $email = escape($email);
   $query_check_email = "SELECT * FROM users WHERE email='$email'";
 
-  /* hasil qyery */
-  $result = mysqli_query($connect, $query_check_email);
-
-  /* uji apakah querynya berhasil */
-  if ($result) {
-    /* lihat apakah di db ada email yang sama dengan yang dimasukan user ? */
-    /* jika hasil pengujian ini adalah 0 berarti tidak ada */
-    if (mysqli_num_rows($result) == 0) {
-      return true;
-    }
-  } else {
-    die("Ada kesalahan");
+  /* hasil qyery sekaligus di uji */
+  if ($result = mysqli_query($connect, $query_check_email) ) {
+    return mysqli_num_rows($result);
   }
-
 }
 
 
@@ -95,30 +84,6 @@ function check_credentials($email, $password) {
   }
 
 }
-
-
-
-/** fungsi pengecekan email saat login */
-/** fungsi ini mirip dengan fungsi register_check_email 
-        * tapi ini adalah kebalikannya */
-function login_check_email($email) {
-  global $connect;
-  $email = escape($email);
-  $query_check_email = "SELECT * FROM users WHERE email='$email'";
-
-  /* hasil qyery */
-  $result = mysqli_query($connect, $query_check_email);
-
-  /* uji apakah querynya berhasil */
-  if ($result) {
-    if (mysqli_num_rows($result) != 0) {
-      return true;
-    }
-  } else {
-    return false;
-  }
-}
-
 
 
 

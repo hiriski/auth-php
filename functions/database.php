@@ -3,7 +3,7 @@
 /** pada latihan ini saya bikin pake mysqli oop */
 $host     = 'localhost';
 $username = 'root';
-$password = '';
+$password = 'kopi';
 $database = 'phpauth';
 
 $connect  = new mysqli($host, $username, $password, $database);
