@@ -26,30 +26,35 @@ function check_email($email) {
 
 
 /** Register User */
-function register_user($name, $email, $password) {
+function register_user($input_name, $input_email, $input_pass, $input_pass_verify) {
 
   /** panggil vaiable $connect dari global */
   global $connect;
 
   /** security sql injection */
-  $name     = escape($name);
-  $email    = escape($email);
-  $password = escape($password);
+  $name     = escape($input_name);
+  $email    = escape($input_email);
+  $password = escape($input_pass);
 
-  /** hash dulu passwordnya */
-  $password = password_hash($password, PASSWORD_DEFAULT);
 
-  /** query signup */
-  $signup_query = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+  /* jika password dan password verify sama lanjutkan programnya
+    tapi jika tidak sama keluarkan alert() */
+  if($input_pass === $input_pass_verify) {
 
-  if($connect->query($signup_query)) {
-    return true;
-  } else {
-    return false;
+    /** hash dulu passwordnya */
+    $password = password_hash($password, PASSWORD_DEFAULT);
+    /** query signup */
+    $signup_query = "INSERT INTO users (name, email, password) VALUES ('$name', '$email', '$password')";
+    if($connect->query($signup_query)) {
+      return true;
+    } else {
+      return false;
+    }
   }
-
+  else {
+    alert('danger', 'Confirm password do not match');
+  }
 }
-
 
 
 /** Login */

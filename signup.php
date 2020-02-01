@@ -5,16 +5,19 @@
 <?php
 
 function signup() {
-  $name     = $_POST['name'];
-  $email    = $_POST['email'];
-  $password = $_POST['password'];
+  $name             = $_POST['name'];
+  $email            = $_POST['email'];
+  $password         = $_POST['password'];
+  $password_verify  = $_POST['password_verify'];
 
   /** pastikan user mengisi name email dan passwordnya + di trim() */
   if ( !empty(trim($name)) && !empty(trim($email)) && !empty(($password)) ) {
 
     /** cek email saat register */
     if (check_email($email) == 0) {
-      if(register_user($name, $email, $password)){
+      /* Password verify akan di proses di method register user, 
+        tujuannya agar jika user type saat isi password tidak akan di proses ke database */
+      if(register_user($name, $email, $password, $password_verify)){
         alert('success', 'Register success!');
       } else {
         alert('danger', 'Register failed!');
@@ -57,6 +60,10 @@ if(isset($_POST['submit'])) {
               <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" name="password" class="form-control">
+              </div>
+              <div class="form-group">
+                <label for="password">Re-enter pasword</label>
+                <input type="password" name="password_verify" class="form-control">
               </div>
               <div class="form-group">
                 <input type="submit" name="submit" class="btn btn-primary" value="Register">
