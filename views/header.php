@@ -35,7 +35,7 @@ function is_logged_in() {
 <head>
   <title><?php echo TITLE ?></title>
   <meta charset="utf-8">
-  <link rel="stylesheet" href="http://localhost/cdn/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
   <style>
     body {
       font-size: 18px;
